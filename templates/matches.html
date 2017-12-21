@@ -1,0 +1,49 @@
+{% extends "scoreboard/header.html" %}
+{% block content %}
+<div class="container">
+	<div class="row"><br/><br/></div>
+	<div class="row justify-content-md-center">
+		<div class="col-3"></div>
+		<div class="col-3">
+			<h1 class="cover-heading" style="text-align:center">Match History</h1>
+		</div>
+		<div class="col-3" align="center">
+			<div class="dropdown" >
+				<a class="btn btn-outline btn-xl dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+					Filter</a>
+				<div class="dropdown-menu" style="background:rgb(115, 162, 239)">
+					<form class="px-4 py-3" method="post">
+						{% csrf_token %}
+						<div class="fieldWrapper">
+							{{ form.player1.label_tag }}
+							{{ form.player1 }}
+						</div>
+						<div class="fieldWrapper">
+							{{ form.player2.label_tag }}
+							{{ form.player2 }}
+						</div>
+					<button  class="btn btn-outline btn-xl js-scroll-trigger">Apply Filter</button>
+					</form>
+				</div>
+			</div>
+		</div>	
+		<div class="col-3"></div>
+	</div>
+	<div class="row justify-content-md-center">
+		<div class="col-8">
+			<table class="table">
+				{% for match in object_list %}
+						<tr>
+							<td align="center"><b>{{ match.p1 }}</b></td>
+							<td align="center">{{ match.s1 }}</td>
+							<td align="center">{{ match.s2 }}</td>
+							<td align="center"><b>{{ match.p2 }}</b></td>
+						</tr>
+					
+				{% endfor %} 
+			</table>
+		</div>		
+	</div>
+</div>
+
+{% endblock %}
